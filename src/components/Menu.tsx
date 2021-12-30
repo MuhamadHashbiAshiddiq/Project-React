@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (
@@ -6,7 +7,14 @@ const Menu = () => {
       <div className="position-sticky pt-3">
         <ul className="nav flex-column">
           <li className="nav-item">
-            <a className="nav-link active">Dashboard</a>
+            <Link to="/" className="nav-link active">
+              Dashboard
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="users" className="nav-link active">
+              Users
+            </Link>
           </li>
         </ul>
       </div>
