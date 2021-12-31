@@ -10,7 +10,7 @@ export default class Register extends Component {
   password = "";
   password_confirm = "";
   state = {
-    redirect: false,
+    navigate: false,
   };
 
   submit = async (e: SyntheticEvent) => {
@@ -23,11 +23,11 @@ export default class Register extends Component {
       password: this.password,
       password_confirm: this.password_confirm,
     });
-    this.setState({ redirect: true });
+    this.setState({ navigate: true });
   };
 
   render() {
-    if (this.state.redirect) {
+    if (this.state.navigate) {
       return <Navigate to={"login"} />;
     }
 
