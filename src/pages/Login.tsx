@@ -11,12 +11,11 @@ const Login = () => {
     e.preventDefault();
 
     const { data } = await axios.post(
-      "http://localhost:8000/api/login",
+      "login",
       {
         email,
         password,
       },
-      { withCredentials: true }
     );
     setNavigate(true);
   };
