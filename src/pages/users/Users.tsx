@@ -33,9 +33,7 @@ const Users = () => {
 
       setUsers(users.filter((u: User) => u.id !== id));
     }
-  }
-
-  }
+  };
 
   return (
     <Wrapper>
@@ -62,7 +60,7 @@ const Users = () => {
                   <td>{user.role.name}</td>
                   <td>
                     <div className="btn-group mr-2">
-                      <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => del(user, id)}>
+                      <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => del(user.id)}>
                         Delete
                       </a>
                     </div>
@@ -93,5 +91,4 @@ const Users = () => {
     </Wrapper>
   );
 };
-
 export default Users;
