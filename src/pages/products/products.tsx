@@ -1,21 +1,30 @@
 import axios from "axios";
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Wrapper from "../../components/Wrapper";
-import { User } from "../../models/user";
+import { Product } from "../../models/product";
 
-const Users = () => {
-  const [users, setUsers] = useState([]);
+const Products = () => {
+  const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(0);
+
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`users?page=${page}`);
+      const { data } = await axios.get(`products?page=${page}`);
 
-      setUsers(data.data);
+      setProducts(data.data);
       setLastPage(data.meta.lastPage);
     })();
   }, [page]);
+
+  const del = async (id: number) => {
+    if (window.confirm("Are u sure Delete?")) {
+      await axios.delete(`products/${id}`);
+
+      setProducts(products.filter((p: Product) => p.id !== id));
+    }
+  };
 
   const next = () => {
     if (page < lastPage) {
@@ -29,18 +38,10 @@ const Users = () => {
     }
   };
 
-  const del = async (id: number) => {
-    if (window.confirm("Are you sure delete?")) {
-      await axios.delete(`users/${id}`);
-
-      setUsers(users.filter((u: User) => u.id !== id));
-    }
-  };
-
   return (
     <Wrapper>
       <div className="pt-3 pb-2 mb-3 border-bottom">
-        <Link to="/users/create" className="btn btn-sm btn-outline-success">
+        <Link to="/roles/create" className="btn btn-sm btn-outline-success">
           Add
         </Link>
       </div>
@@ -50,28 +51,30 @@ const Users = () => {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Email</th>
-              <th scope="col">Role</th>
+              <th scope="col">Image</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
               <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user: User) => {
+            {products.map((p: Product) => {
               return (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
+                <tr key={p.id}>
+                  <td>{p.id}</td>
                   <td>
-                    {user.first_name} {user.last_name}
+                    <img src={p.image} width="50" />
                   </td>
-                  <td>{user.email}</td>
-                  <td>{user.role.name}</td>
+                  <td>{p.title}</td>
+                  <td>{p.description}</td>
+                  <td>{p.price}</td>
                   <td>
                     <div className="btn-group mr-2">
-                      <Link to={`/users/$(user.id)/edit`} className="btn btn-sm btn-outline-secondary">
+                      <Link to={`/products/$(p.id)/edit`} className="btn btn-sm btn-outline-secondary">
                         Edit
                       </Link>
-                      <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => del(user.id)}>
+                      <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => del(p.id)}>
                         Delete
                       </a>
                     </div>
@@ -102,4 +105,4 @@ const Users = () => {
     </Wrapper>
   );
 };
-export default Users;
+export default Products;
