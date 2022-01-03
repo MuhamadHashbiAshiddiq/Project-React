@@ -48,7 +48,7 @@ const RoleCreate = () => {
         <div className="mb-3 mt-3 row">
           <label className="col-sm-2 col-form-label">Name</label>
           <div className="col-sm-10">
-            <input className="form-control" oncChange={e => setName(e.target.value)} />
+            <input className="form-control" onChange={e => setName(e.target.value)} />
           </div>
         </div>
         <div className="mb-3 row">
