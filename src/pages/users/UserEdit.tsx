@@ -11,8 +11,7 @@ const UserEdit = (props: any) => {
   const [role_id, setRoleId] = useState("");
   const [roles, setRoles] = useState([]);
   const [navigate, setNavigate] = useState(false);
-  let id: number;
-
+  
   useEffect(() => {
     (async () => {
       const response = await axios.get("roles");
