@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { Component, SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Navigate } from "react-router-dom";
+import ImageUpload from "../../components/ImageUpload";
 import Wrapper from "../../components/Wrapper";
 
 const ProductCreate = () => {
@@ -23,8 +24,8 @@ const ProductCreate = () => {
     setNavigate(true);
   };
 
-  if(navigate) {
-    return <Navigate to="products"/>
+  if (navigate) {
+    return <Navigate to="products" />;
   }
 
   return (
@@ -32,19 +33,22 @@ const ProductCreate = () => {
       <form onSubmit={submit}>
         <div className="mb-3">
           <label>Title</label>
-          <input className="form-control" onChange={e => setTitle(e.target.value)} />
+          <input className="form-control" onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div className="mb-3">
           <label>Description</label>
-          <textarea className="form-control" onChange={e => setDescription(e.target.value)}/>
+          <textarea className="form-control" onChange={(e) => setDescription(e.target.value)} />
         </div>
         <div className="mb-3">
           <label>Image</label>
-          <input className="form-control" onChange={e => setImage(e.target.value)}/>
+          <div className="input-group">
+            <input className="form-control" value={image} onChange={(e) => setImage(e.target.value)} />
+            <ImageUpload uploaded={setImage}/>
+          </div>
         </div>
         <div className="mb-3">
           <label>Price</label>
-          <input type="number" className="form-control" onChange={e => setPrice(e.target.value)}/>
+          <input type="number" className="form-control" onChange={(e) => setPrice(e.target.value)} />
         </div>
         <button className="btn btn-outline-secondary">Save</button>
       </form>
