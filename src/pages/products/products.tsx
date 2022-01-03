@@ -30,7 +30,7 @@ const Products = () => {
   return (
     <Wrapper>
       <div className="pt-3 pb-2 mb-3 border-bottom">
-        <Link to="/roles/create" className="btn btn-sm btn-outline-success">
+        <Link to="/products/create" className="btn btn-sm btn-outline-success">
           Add
         </Link>
       </div>
