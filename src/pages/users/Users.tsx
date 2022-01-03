@@ -6,7 +6,7 @@ import { User } from "../../models/user";
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
-const [lastPage, setLastPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`users?page=${page}`);
@@ -19,12 +19,22 @@ const [lastPage, setLastPage] = useState(0);
     if (page < lastPage) {
       setPage(page + 1);
     }
-  }
+  };
 
   const prev = () => {
     if (page >= 1) {
       setPage(page - 1);
     }
+  };
+
+  const del = async (id: number) => {
+    if (window.confirm("Are you sure delete?")) {
+      await axios.delete(`users/${id}`);
+
+      setUsers(users.filter((u: User) => u.id !== id));
+    }
+  }
+
   }
 
   return (
@@ -50,7 +60,13 @@ const [lastPage, setLastPage] = useState(0);
                   </td>
                   <td>{user.email}</td>
                   <td>{user.role.name}</td>
-                  <td></td>
+                  <td>
+                    <div className="btn-group mr-2">
+                      <a href="#" className="btn btn-sm btn-outline-secondary" onClick={() => del(user, id)}>
+                        Delete
+                      </a>
+                    </div>
+                  </td>
                 </tr>
               );
             })}
@@ -61,10 +77,16 @@ const [lastPage, setLastPage] = useState(0);
       <nav>
         <ul className="pagination">
           <li className="page-item">
-            <a href="#" className="page-link" onClick={prev}> Previous</a>
+            <a href="#" className="page-link" onClick={prev}>
+              {" "}
+              Previous
+            </a>
           </li>
           <li className="page-item">
-            <a href="#" className="page-link" onClick={next}> Next</a>
+            <a href="#" className="page-link" onClick={next}>
+              {" "}
+              Next
+            </a>
           </li>
         </ul>
       </nav>
