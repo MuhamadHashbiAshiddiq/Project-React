@@ -10,7 +10,7 @@ const Nav = () => {
     (async () => {
       const { data } = await axios.get('user');
 
-      setUser(new User(data.id, data.first_name, data.last_name, data.email));
+      setUser(new User(data.id, data.first_name, data.last_name, data.email, data.role));
     })();
   }, []);
 
