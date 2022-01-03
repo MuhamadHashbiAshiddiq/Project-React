@@ -25,10 +25,10 @@ const Nav = () => {
       </a>
 
       <ul className="my-2 my-md-0 mr-md-3">
-        <Link to="profile" className="p-2 text-white text-decoration-none">
+        <Link to="/profile" className="p-2 text-white text-decoration-none">
           {user.name}
         </Link>
-        <Link to="login" className="p-2 text-white text-decoration-none" onClick={logout}>
+        <Link to="/login" className="p-2 text-white text-decoration-none" onClick={logout}>
           Sign out
         </Link>
       </ul>
