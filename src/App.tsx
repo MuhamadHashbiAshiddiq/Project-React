@@ -13,6 +13,7 @@ import RoleEdit from "./pages/roles/RoleEdit";
 import Products from "./pages/products/products";
 import ProductCreate from "./pages/products/ProductCreate";
 import ProductEdit from "./pages/products/ProductEdit";
+import Orders from "./pages/orders/Orders";
 
 function App() {
   return (
@@ -24,13 +25,14 @@ function App() {
           <Route path={"register/*"} element={<Register />} />
           <Route path={"users/*"} element={<Users />} />
           <Route path={"users/create/*"} element={<UserCreate />} />
-          <Route path={"users/:id/edit*"} element={<UserEdit />} />
-          <Route path={"roles*"} element={<Roles />} />
-          <Route path={"roles/create*"} element={<RoleCreate />} />
-          <Route path={"roles/:id/edit*"} element={<RoleEdit />} />
-          <Route path={"products*"} element={<Products />} />
-          <Route path={"products/create*"} element={<ProductCreate />} />
-          <Route path={"products/:id/edit*"} element={<ProductEdit />} />
+          <Route path={"users/:id/edit/*"} element={<UserEdit />} />
+          <Route path={"roles/*"} element={<Roles />} />
+          <Route path={"roles/create/*"} element={<RoleCreate />} />
+          <Route path={"roles/:id/edit/*"} element={<RoleEdit />} />
+          <Route path={"products/*"} element={<Products />} />
+          <Route path={"products/create/*"} element={<ProductCreate />} />
+          <Route path={"products/:id/edit/*"} element={<ProductEdit />} />
+          <Route path={"orders/*"} element={<Orders />} />
         </Routes>
       </BrowserRouter>
     </div>
