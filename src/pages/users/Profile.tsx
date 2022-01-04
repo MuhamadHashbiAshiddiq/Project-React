@@ -1,8 +1,11 @@
 import axios from "axios";
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { Dispatch, SyntheticEvent, useEffect, useState } from "react";
+import { connect } from "react-redux";
 import Wrapper from "../../components/Wrapper";
+import { User } from "../../models/user";
+import { setUser } from "../redux/actions/setUserAction";
 
-const Profile = () => {
+const Profile = (props: { user: User; setUser: (user: User) => void }) => {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -10,23 +13,21 @@ const Profile = () => {
   const [password_confirm, setPasswordConfirm] = useState("");
 
   useEffect(() => {
-    (async () => {
-      const { data } = await axios.get("user");
-
-      setFirstName(data.first_name);
-      setLastName(data.last_name);
-      setEmail(data.email);
-    })();
-  }, []);
+    setFirstName(props.user.first_name);
+    setLastName(props.user.last_name);
+    setEmail(props.user.email);
+  }, [props.user]);
 
   const infoSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
 
-    await axios.put("users/info", {
+    const { data } = await axios.put("users/info", {
       first_name,
       last_name,
       email,
     });
+
+    props.setUser(new User(data.id, data.first_name, data.last_name, data.email, data.role));
   };
 
   const passwordSubmit = async (e: SyntheticEvent) => {
@@ -75,4 +76,15 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default connect(
+  (state: { user: User }) => {
+    return {
+      user: state.user,
+    };
+  },
+  (dispatch: Dispatch<any>) => {
+    return {
+      setUser: (user: User) => dispatch(setUser(user)),
+    };
+  }
+)(Profile);
