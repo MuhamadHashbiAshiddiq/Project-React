@@ -14,6 +14,7 @@ import Products from "./pages/products/products";
 import ProductCreate from "./pages/products/ProductCreate";
 import ProductEdit from "./pages/products/ProductEdit";
 import Orders from "./pages/orders/Orders";
+import Profile from "./pages/users/Profile";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={"/"} element={<Dashboard />} />
+          <Route path={"profile/*"} element={<Profile />} />
           <Route path={"login/*"} element={<Login />} />
           <Route path={"register/*"} element={<Register />} />
           <Route path={"users/*"} element={<Users />} />
